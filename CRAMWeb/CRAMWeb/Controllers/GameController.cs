@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using CRAMWeb.Models;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace CRAMWeb.Controllers
 {
@@ -10,6 +12,10 @@ namespace CRAMWeb.Controllers
         // GET: Game
         public ActionResult Index()
         {
+            using (var db = new ApplicationContext())
+            {
+                var users = db.Users.ToList();
+            }
             return View();
         }
     }

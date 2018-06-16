@@ -31,11 +31,6 @@ namespace CRAMWeb.Models
         /// <summary>
         /// List of players
         /// </summary>
-        public virtual IList<ApplicationUser> Users { get; set; }
-
-        /// <summary>
-        /// List of players
-        /// </summary>
-        public virtual IList<GameState> GameDatas { get; set; }
+        public virtual IList<GameState> GameStates { get; set; }
     }
 }

@@ -44,7 +44,7 @@ namespace CRAMWeb.Models
         /// <summary>
         /// Raids player sended from his castle
         /// </summary>
-        public virtual IList<Raid> SendedRaids { get; set; }
+        public virtual IList<Raid> SentRaids { get; set; }
 
         /// <summary>
         /// Raids other players sended to player's castle

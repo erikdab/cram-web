@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,11 @@ namespace CRAMWeb.Models
     /// </summary>
     public class Raid
     {
+        /// <summary>
+        /// Raid Id.
+        /// </summary>
+        public int Id { get; set; }
+
         /// <summary>
         /// Soldiers sended on raid
         /// </summary>
@@ -39,11 +45,13 @@ namespace CRAMWeb.Models
         /// <summary>
         /// Player who sends raid
         /// </summary>
+        [Required]
         public virtual ApplicationUser AtackingPlayer { get; set; }
 
         /// <summary>
         /// Playr who will defend agains raid
         /// </summary>
+        [Required]
         public virtual ApplicationUser DefendingPlayer { get; set; }
     }
 }

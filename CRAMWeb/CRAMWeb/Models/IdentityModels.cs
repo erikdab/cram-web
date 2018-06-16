@@ -30,6 +30,10 @@ namespace CRAMWeb.Models
             return new ApplicationDbContext();
         }
 
+        public virtual DbSet<Game> Games { get; set; }
+        public virtual DbSet<GameState> GameStates { get; set; }
+        public virtual DbSet<Raid> Raids { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder builder)
         {
             builder.HasDefaultSchema("KacperWeissErikBurnell");

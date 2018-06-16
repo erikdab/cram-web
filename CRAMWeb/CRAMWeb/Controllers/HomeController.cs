@@ -19,7 +19,12 @@ namespace CRAMWeb.Controllers
         {
             using (var db = new ApplicationDbContext())
             {
-                var users = db.Users.ToList();
+                db.Games.Add(new Game
+                {
+                    GameName = "fun game",
+                    MaxPlayers = 2
+                });
+                db.SaveChanges();
             }
             return View();
         }

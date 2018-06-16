@@ -45,13 +45,11 @@ namespace CRAMWeb.Models
         /// <summary>
         /// Player who sends raid
         /// </summary>
-        [Required]
         public virtual ApplicationUser AtackingPlayer { get; set; }
 
         /// <summary>
         /// Playr who will defend agains raid
         /// </summary>
-        [Required]
         public virtual ApplicationUser DefendingPlayer { get; set; }
     }
 }

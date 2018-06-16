@@ -1,0 +1,89 @@
+﻿@section Styles {
+    <link href="@Url.Content("~/Content/game.css")" rel="stylesheet" type="text/css" />
+}
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/game.js")"></script>
+}
+@section Footer
+{
+    <p>
+        <b>Game Goal:</b> Complete the Castle District by upgrading it to level 4!
+    </p>
+}
+<!-- Navigation sidebar -->
+<nav>
+    <table class="left resource" id="resourceStash">
+        <tr>
+            <td>
+                <img src="/Content/Images/grain.png" alt="Grain" />
+            </td>
+            <td class="resourceValue">
+                <div id="resourceGrain">0</div>
+            </td>
+            <td>
+                <img src="/Content/Images/wood.png" alt="wood" />
+            </td>
+            <td class="resourceValue">
+                <div id="resourceWood">0</div>
+            </td>
+            <td>
+                <img src="/Content/Images/stone.png" alt="stone" />
+            </td>
+            <td class="resourceValue">
+                <div id="resourceStone">0</div>
+            </td>
+            <td>
+                <img src="/Content/Images/gold.png" alt="gold" />
+            </td>
+            <td class="resourceValue">
+                <div id="resourceGold">0</div>
+            </td>
+        </tr>
+    </table>
+    <!-- Time spent on page -->
+    <div class="left timer">Game Time: <span id="timer">00:00</span></div>
+</nav>
+<!-- Main content -->
+<section>
+    <!-- Map -->
+    <canvas class="left clear" id="map"></canvas>
+    <!-- District Information Panel -->
+    <div class="right" id="districtInfo">
+        <!-- District Name -->
+        <h2 id="districtName"><u>Farm District: Level 1</u></h2>
+        <!-- District Thumbnail image -->
+        <img class="left" id="districtThumbnail" alt="District Thumbnail" />
+        <!-- District Description -->
+        <p id="districtDescription"></p>
+        <!-- District Upgrade Table with Upgrad button and costs-->
+        <div id="districtUpgrade">
+            <table class="resource" id="districtUpgradeCosts">
+                <tr style="height: 35px;">
+                    <th colspan="4">
+                        <button class="left" id="districtUpgradeButton" onclick="upgradeDistrict()"></button>
+                        <div id="upgradeText">Buy Upgrade</div>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="/Content/Images/grain.png" alt="Grain" />
+                        <div id="districtUpgradeGrainCost">0</div>
+                    </td>
+                    <td>
+                        <img src="/Content/Images/wood.png" alt="wood" />
+                        <div id="districtUpgradeWoodCost">0</div>
+                    </td>
+                    <td>
+                        <img src="/Content/Images/stone.png" alt="stone" />
+                        <div id="districtUpgradeStoneCost">0</div>
+                    </td>
+                    <td>
+                        <img src="/Content/Images/gold.png" alt="gold" />
+                        <div id="districtUpgradeGoldCost">0</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</section>

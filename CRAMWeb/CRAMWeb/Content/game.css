@@ -1,0 +1,162 @@
+﻿/* Header styling */
+header {
+    background-image: url("Images/background1.jpg");
+    background-size: cover;
+    height: 100px;
+    text-align: center;
+    border-radius: 20px;
+    border: solid 2px;
+    margin-bottom: 10px;
+}
+
+/* Header title styling */
+header h1 {
+    color: black;
+    text-align: center;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    line-height: 100px;
+    margin-top: 0px;
+}
+
+/* Header image banner styling */
+header img {
+    height: 80px;
+    margin: 10px;
+    float: left;
+    border-radius: 20px;
+}
+
+/* Footer styling */
+footer {
+    background-image: url("Images/background1.jpg");
+    background-size: cover;
+    border: 2px solid;
+    text-align: center;
+    border-radius: 20px;
+    margin-top: 10px;
+    background-color: gray;
+}
+
+/* Navigation bar styling */
+nav {
+    background-image: url("Images/background1.jpg");
+    background-size: cover;
+    height: 45px;
+    border-radius: 20px;
+    border: 2px solid;
+    width: 900px;
+    margin: auto;
+    margin-bottom: 10px;
+    padding-left: 20px;
+}
+
+/* Timer styling */
+.timer {
+    width: 200px;
+    text-align: center;
+    line-height: 45px;
+}
+
+/* Content section styling */
+section {
+    color: black;
+    height: 700px;
+    width: 900px;
+    margin: auto;
+}
+
+/* Map styling */
+#map {
+    border-radius: 10px;
+    border: solid 2px;
+    width: 560px;
+}
+
+/* District Information styling */
+#districtInfo {
+    border-radius: 10px;
+    background-image: url("Images/background1.jpg");
+    background-size: cover;
+    border: solid 2px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    width: 310px;
+    margin-left: 0px !important;
+}
+
+/* District Thumbnail styling */
+#districtThumbnail {
+    border-radius: 20px;
+    border: solid 2px;
+    width: 70px;
+    height: 70px;
+}
+
+/* District description styling */
+#districtDescription {
+    margin-left: 80px;
+    height: 70px;
+}
+
+/* Upgrade costs button styling */
+#districtUpgradeButton {
+    background-image: url("Images/arrowUp.png");
+    background-size: 30px 30px;
+    height: 35px;
+    width: 35px;
+    border: solid;
+    border-bottom-width: 1px;
+    border-right-width: 2px;
+    border-top-width: 1px;
+    border-left-width: 1px;
+}
+
+/* Upgrade costs table styling */
+table.resource {
+    background-image: url("Images/background1.jpg");
+    background-size: cover;
+    padding: 0px;
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+/* Resource Stash styling */
+#resourceStash {
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+}
+
+#resourceStash .resourceValue {
+    width: 80px;
+    border-right: 1px solid;
+}
+
+/* District Upgrade cost styling */
+#districtUpgradeCosts {
+    width: 100%;
+}
+
+/* Upgrade costs table data styling */
+table.resource td {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    padding: 0px;
+}
+
+/* Upgrade costs table header styling */
+table.resource th {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: left;
+    padding: 0px;
+    border-bottom: 1px solid;
+    line-height: 35px;
+}
+
+/* Upgrade text styling */
+#upgradeText {
+    line-height: 35px;
+    margin-left: 40px;
+}

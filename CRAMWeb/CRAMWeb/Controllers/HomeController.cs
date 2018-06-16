@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CRAMWeb.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,16 @@ namespace CRAMWeb.Controllers
     {
         public ActionResult Index()
         {
+            return View();
+        }
+
+        // GET: Game
+        public ActionResult Game()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var users = db.Users.ToList();
+            }
             return View();
         }
 

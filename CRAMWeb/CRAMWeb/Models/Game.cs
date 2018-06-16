@@ -10,7 +10,6 @@ namespace CRAMWeb.Models
     /// <summary>
     /// Table containing games
     /// </summary>
-    [Table("KacperWeissErikBurnellGames")]
     public class Game
     {
         /// <summary>
@@ -32,7 +31,7 @@ namespace CRAMWeb.Models
         /// <summary>
         /// List of players
         /// </summary>
-        public virtual IList<User> Users { get; set; }
+        public virtual IList<ApplicationUser> Users { get; set; }
 
 
     }

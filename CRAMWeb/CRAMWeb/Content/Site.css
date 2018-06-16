@@ -24,11 +24,11 @@ textarea {
     padding: 0px;
 }
 
-.navbar-brand > img {
-    height: 40px;
-    border-radius: 10px;
-    margin-top: 5px;
-}
+    .navbar-brand > img {
+        height: 40px;
+        border-radius: 10px;
+        margin-top: 5px;
+    }
 
 .paper {
     background-image: url("Images/background1.jpg");

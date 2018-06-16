@@ -7,12 +7,13 @@ namespace CRAMWeb.Controllers
     /// <summary>
     /// MVC Controller for the Game
     /// </summary>
+    [Authorize]
     public class GameController : Controller
     {
         // GET: Game
         public ActionResult Index()
         {
-            using (var db = new ApplicationContext())
+            using (var db = new ApplicationDbContext())
             {
                 var users = db.Users.ToList();
             }

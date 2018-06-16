@@ -19,9 +19,9 @@ namespace CRAMWeb.Controllers
         {
             using (var db = new ApplicationDbContext())
             {
-                var users = db.Users.ToList();
+                var games = db.Games.ToList();
+                return View(games);
             }
-            return View();
         }
 
         // GET: Games/Details/5

@@ -27,6 +27,7 @@ namespace CRAMWeb.Controllers
         }
 
         // GET: Games/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -42,6 +43,7 @@ namespace CRAMWeb.Controllers
         }
 
         // GET: Games/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -52,6 +54,7 @@ namespace CRAMWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "Id,GameName,MaxPlayers")] Game game)
         {
             if (ModelState.IsValid)
@@ -65,6 +68,7 @@ namespace CRAMWeb.Controllers
         }
 
         // GET: Games/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -84,6 +88,7 @@ namespace CRAMWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,GameName,MaxPlayers")] Game game)
         {
             if (ModelState.IsValid)
@@ -96,6 +101,7 @@ namespace CRAMWeb.Controllers
         }
 
         // GET: Games/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -113,6 +119,7 @@ namespace CRAMWeb.Controllers
         // POST: Games/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Game game = db.Games.Find(id);
@@ -122,8 +129,8 @@ namespace CRAMWeb.Controllers
         }
 
         // POST: Games/Delete/5
-        [HttpPost, ActionName("Join")]
-        [ValidateAntiForgeryToken]
+        [HttpGet, ActionName("Join")]
+        [Authorize]
         public ActionResult JoinGame(int id)
         {
             if (User.Identity.IsAuthenticated)

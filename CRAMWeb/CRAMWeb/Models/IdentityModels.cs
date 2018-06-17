@@ -21,7 +21,7 @@ namespace CRAMWeb.Models
         /// <summary>
         /// Player's Games.
         /// </summary>
-        public virtual IList<Game> Game { get; set; }
+        public virtual IList<Game> Games { get; set; }
 
         /// <summary>
         /// Player's Game States.

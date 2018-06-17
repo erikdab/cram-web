@@ -42,6 +42,31 @@ namespace CRAMWeb.Models
         public int Soldiers { get; set; }
 
         /// <summary>
+        /// Castle's level
+        /// </summary>
+        public int CastleLevel { get; set; }
+
+        /// <summary>
+        /// Farms's level
+        /// </summary>
+        public int FarmsLevel { get; set; }
+
+        /// <summary>
+        /// Lumberjack's level
+        /// </summary>
+        public int LumberjackLevel { get; set; }
+
+        /// <summary>
+        /// Housing's level
+        /// </summary>
+        public int HousingLevel { get; set; }
+
+        /// <summary>
+        /// Mines's level
+        /// </summary>
+        public int MinesLevel { get; set; }
+
+        /// <summary>
         /// Raids player sended from his castle
         /// </summary>
         public virtual IList<Raid> SentRaids { get; set; }

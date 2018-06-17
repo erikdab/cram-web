@@ -67,6 +67,16 @@ namespace CRAMWeb.Models
         public int MinesLevel { get; set; }
 
         /// <summary>
+        /// Application User.
+        /// </summary>
+        public virtual ApplicationUser User { get; set; }
+
+        /// <summary>
+        /// Game which Game State belongs to.
+        /// </summary>
+        public virtual Game Game { get; set; }
+
+        /// <summary>
         /// Raids player sended from his castle
         /// </summary>
         public virtual IList<Raid> SentRaids { get; set; }

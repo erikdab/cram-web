@@ -43,13 +43,15 @@ namespace CRAMWeb.Models
         public int Gold { get; set; }
 
         /// <summary>
-        /// Player who sends raid
+        /// Game State of Player who sends raid
         /// </summary>
-        public virtual ApplicationUser AtackingPlayer { get; set; }
+        [InverseProperty("SentRaids")]
+        public virtual GameState AttackingGameState { get; set; }
 
         /// <summary>
-        /// Playr who will defend agains raid
+        /// Game State of Player who will defend against raid
         /// </summary>
-        public virtual ApplicationUser DefendingPlayer { get; set; }
+        [InverseProperty("ReceivedRaids")]
+        public virtual GameState DefendingGameState { get; set; }
     }
 }

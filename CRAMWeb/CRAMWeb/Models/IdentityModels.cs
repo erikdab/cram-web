@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -16,6 +17,16 @@ namespace CRAMWeb.Models
             // Add custom user claims here
             return userIdentity;
         }
+        
+        /// <summary>
+        /// Player's Games.
+        /// </summary>
+        public virtual IList<Game> Game { get; set; }
+
+        /// <summary>
+        /// Player's Game States.
+        /// </summary>
+        public virtual IList<GameState> GameStates { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

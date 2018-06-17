@@ -86,4 +86,66 @@ namespace CRAMWeb.Models
         /// </summary>
         public virtual IList<Raid> ReceivedRaids { get; set; }
     }
+
+
+    /// <summary>
+    /// Table containing data about game
+    /// </summary>
+    public class GameStateDTO
+    {
+        /// <summary>
+        /// Game data's Id.
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Food stored in castle
+        /// </summary>
+        public int Food { get; set; }
+
+        /// <summary>
+        /// Wood stored in castle
+        /// </summary>
+        public int Wood { get; set; }
+
+        /// <summary>
+        /// Stone stored in castle
+        /// </summary>
+        public int Stone { get; set; }
+
+        /// <summary>
+        /// Gold stored in castle
+        /// </summary>
+        public int Gold { get; set; }
+
+        /// <summary>
+        /// Soldiers garisoned in castle
+        /// </summary>
+        public int Soldiers { get; set; }
+
+        /// <summary>
+        /// Castle's level
+        /// </summary>
+        public int CastleLevel { get; set; }
+
+        /// <summary>
+        /// Farms's level
+        /// </summary>
+        public int FarmsLevel { get; set; }
+
+        /// <summary>
+        /// Lumberjack's level
+        /// </summary>
+        public int LumberjackLevel { get; set; }
+
+        /// <summary>
+        /// Housing's level
+        /// </summary>
+        public int HousingLevel { get; set; }
+
+        /// <summary>
+        /// Mines's level
+        /// </summary>
+        public int MinesLevel { get; set; }
+    }
 }

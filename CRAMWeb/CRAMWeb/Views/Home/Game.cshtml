@@ -1,4 +1,5 @@
-﻿@section Styles {
+﻿@model CRAMWeb.Models.GameState
+@section Styles {
     <link href="@Url.Content("~/Content/game.css")" rel="stylesheet" type="text/css" />
 }
 @section Scripts
@@ -87,3 +88,4 @@
         </div>
     </div>
 </section>
+<input id="Id" type="hidden" value="@Model.Id" />

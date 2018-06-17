@@ -9,24 +9,18 @@ namespace CRAMWeb.Controllers
 {
     public class HomeController : Controller
     {
+
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Game
-        public ActionResult Game()
+        // GET: Game/5
+        public ActionResult Game(int id)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                db.Games.Add(new Game
-                {
-                    GameName = "fun game",
-                    MaxPlayers = 2
-                });
-                db.SaveChanges();
-            }
-            return View();
+            ApplicationDbContext db = new ApplicationDbContext();
+            var gameState = db.GameStates.Find(id);
+            return View(gameState);
         }
 
         public ActionResult About()

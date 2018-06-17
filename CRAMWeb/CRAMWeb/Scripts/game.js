@@ -22,6 +22,7 @@ function gameTick() {
         alert("Congratulations! You won the game! Refresh the page to start again");
         clearInterval(gameTimer);
     }
+    syncGameState();
 }
 
 // Repeat timer function every second to update it
@@ -36,6 +37,41 @@ function pad(num, size) {
 
 // Classes
 // ----------------------------------------------------------------------------
+
+class GameState {
+    constructor(id, gameState = null) {
+        // Game State Id
+        this.Id = id;
+        if (gameState != null) {
+            this.Food = gameState.Food;
+            this.Wood = gameState.Wood;
+            this.Stone = gameState.Stone;
+            this.Gold = gameState.Gold;
+        }
+        else {
+            this.Food = 0;
+            this.Wood = 0;
+            this.Stone = 0;
+            this.Gold = 0;
+        }
+    }
+
+    // Load Resources Stash
+    loadFromStash(stash) {
+        this.Food = stash.food;
+        this.Wood = stash.wood;
+        this.Stone = stash.stone;
+        this.Gold = stash.gold;
+    }
+
+    // Load Resources Stash
+    saveToStash(stash) {
+        stash.food = this.Food;
+        stash.wood = this.Wood;
+        stash.stone = this.Stone;
+        stash.gold = this.Gold;
+    }
+}
 
 // District class
 class District {
@@ -151,6 +187,10 @@ class Resources {
         return new Resources(this.food * amount, this.wood * amount, this.stone * amount, this.gold * amount);
     }
 }
+
+// Game Data
+// ----------------------------------------------------------------------------
+var gameId = 0;
 
 // Setup Districts
 // ----------------------------------------------------------------------------
@@ -360,9 +400,61 @@ function collides(rects, x, y) {
     return isCollision;
 }
 
-// Run on start
+pullGameState();
+
+// Data Synchronization
 // ----------------------------------------------------------------------------
 
-// Once all is initialized, update selected district information.
-updateSelectedDistrict();
-updateResourceStash();
+// Pull Game data from Server
+function pullGameState() {
+    gameId = $('#Id').val();
+    $.ajax({
+        url: "/api/GameState/" + gameId,
+        typr: "GET",
+        contentType: "application/json;charset=UTF-8",
+        dataType: "json",
+        success: function (result) {
+            var gameState = new GameState(gameId, result);
+            gameState.saveToStash(resourceStash);
+            updateSelectedDistrict();
+            updateResourceStash();
+        },
+        error: function (errormessage) {
+            handleSaveErrors(errormessage.responseText);
+        }
+    });
+    updateSelectedDistrict();
+    updateResourceStash();
+}
+
+// Save Game data to Server
+function syncGameState() {
+    var gameState = new GameState(gameId);
+    gameState.loadFromStash(resourceStash);
+    var test = JSON.stringify(gameState);
+    $.ajax({
+        url: "/api/GameState/" + gameId,
+        data: JSON.stringify(gameState),
+        type: "PUT",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            // If need to do anything
+        },
+        error: function (errormessage) {
+            handleSaveErrors(errormessage.responseText);
+        }
+    });
+}
+
+// Function which handles errors
+// If has key
+function handleSaveErrors(validationErrors) {
+    var errors = JSON.parse(validationErrors);
+    for (var key in errors.ModelState) {
+        var property = key.replace("contact.", "");
+        var message = errors.ModelState[key].join("<br />");
+        console.log(message);
+        //$('#Message').html(message);
+    }
+}

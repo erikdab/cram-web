@@ -137,9 +137,9 @@ namespace CRAMWeb.Controllers
             {
                 var userId = User.Identity.GetUserId();
                 GameContextManager.AddOrUpdateUserToGame(db, id, userId);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id });
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", new {id});
         }
 
         protected override void Dispose(bool disposing)

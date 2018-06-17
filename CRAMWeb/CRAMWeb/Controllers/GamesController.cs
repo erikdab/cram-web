@@ -166,7 +166,11 @@ namespace CRAMWeb.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var userId = User.Identity.GetUserId();
-                GameContextManager.AddOrUpdateUserAndGameConnection(db, id, userId);
+                ApplicationUser user = db.Users.Single(u => u.Id == userId);
+                Game game = db.Games.Single(g => g.Id == id);
+                game.Users.Remove(user);
+                user.Games.Remove(game);
+                db.SaveChanges();
                 return RedirectToAction("Details", new { id });
             }
             return RedirectToAction("Details", new { id });
@@ -204,8 +208,8 @@ namespace CRAMWeb.Controllers
                             ReceivedRaids = new List<Raid>()
                         };
                         db.GameStates.Add(gameState);
-                        db.SaveChanges();
                     }
+                    db.SaveChanges();
                 }
                 GameState userGameState = game.GameStates.Single(g => g.User.Id == userId);
                 return RedirectToAction("Game", "Home", new { userGameState.Id });

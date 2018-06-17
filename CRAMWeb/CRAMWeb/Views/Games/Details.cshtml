@@ -55,7 +55,7 @@
         @Html.ActionLink("Leave", "Leave", new { id = Model.Id })
         <text>|</text>
     }
-    else
+    else if (!Model.IsStarted)
     {
         @Html.ActionLink("Join", "Join", new { id = Model.Id })
         <text>|</text>

@@ -47,29 +47,83 @@ class GameState {
             this.Wood = gameState.Wood;
             this.Stone = gameState.Stone;
             this.Gold = gameState.Gold;
+            this.Soldiers = gameState.Soldiers;
+            this.FarmsLevel = gameState.FarmsLevel;
+            this.LumberjackLevel = gameState.LumberjackLevel;
+            this.CastleLevel = gameState.CastleLevel;
+            this.HousingLevel = gameState.HousingLevel;
+            this.MinesLevel = gameState.MinesLevel;
         }
         else {
             this.Food = 0;
             this.Wood = 0;
             this.Stone = 0;
             this.Gold = 0;
+            this.Soldiers = 0;
+            this.FarmsLevel = 1;
+            this.LumberjackLevel = 1;
+            this.CastleLevel = 1;
+            this.HousingLevel = 1;
+            this.MinesLevel = 1;
         }
     }
 
-    // Load Resources Stash
-    loadFromStash(stash) {
+    // Load From Variables
+    load(stash, districts) {
         this.Food = stash.food;
         this.Wood = stash.wood;
         this.Stone = stash.stone;
         this.Gold = stash.gold;
+
+        for (var key in districts) {
+            var district = districts[key];
+            switch (district.name) {
+                case "Farm":
+                    this.FarmsLevel = district.level;
+                    break;
+                case "Lumberjack":
+                    this.LumberjackLevel = district.level;
+                    break;
+                case "Mines":
+                    this.MinesLevel = district.level;
+                    break;
+                case "Housing":
+                    this.HousingLevel = district.level;
+                    break;
+                case "Castle":
+                    this.CastleLevel = district.level;
+                    break;
+            }
+        }
     }
 
-    // Load Resources Stash
-    saveToStash(stash) {
+    // Save To Variables
+    save(stash, districts) {
         stash.food = this.Food;
         stash.wood = this.Wood;
         stash.stone = this.Stone;
         stash.gold = this.Gold;
+
+        for (var key in districts) {
+            var district = districts[key];
+            switch (district.name) {
+                case "Farm":
+                    district.level = this.FarmsLevel;
+                    break;
+                case "Lumberjack":
+                    district.level = this.LumberjackLevel;
+                    break;
+                case "Mines":
+                    district.level = this.MinesLevel;
+                    break;
+                case "Housing":
+                    district.level = this.HousingLevel;
+                    break;
+                case "Castle":
+                    district.level = this.CastleLevel;
+                    break;
+            }
+        }
     }
 }
 
@@ -415,7 +469,7 @@ function pullGameState() {
         dataType: "json",
         success: function (result) {
             var gameState = new GameState(gameId, result);
-            gameState.saveToStash(resourceStash);
+            gameState.save(resourceStash, districts);
             updateSelectedDistrict();
             updateResourceStash();
         },
@@ -430,7 +484,7 @@ function pullGameState() {
 // Save Game data to Server
 function syncGameState() {
     var gameState = new GameState(gameId);
-    gameState.loadFromStash(resourceStash);
+    gameState.load(resourceStash, districts);
     var test = JSON.stringify(gameState);
     $.ajax({
         url: "/api/GameState/" + gameId,

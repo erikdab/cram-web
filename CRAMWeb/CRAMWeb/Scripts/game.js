@@ -504,11 +504,15 @@ function syncGameState() {
 // Function which handles errors
 // If has key
 function handleSaveErrors(validationErrors) {
-    var errors = JSON.parse(validationErrors);
-    for (var key in errors.ModelState) {
-        var property = key.replace("contact.", "");
-        var message = errors.ModelState[key].join("<br />");
+    try {
+        var errors = JSON.parse(validationErrors);
+        for (var key in errors.ModelState) {
+            var property = key.replace("contact.", "");
+            var message = errors.ModelState[key].join("<br />");
+            console.log(message);
+        }
+    }
+    catch (e) {
         console.log(message);
-        //$('#Message').html(message);
     }
 }

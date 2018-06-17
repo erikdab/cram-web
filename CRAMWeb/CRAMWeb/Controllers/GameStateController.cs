@@ -38,6 +38,11 @@ namespace CRAMWeb.Controllers
                 Wood = gameState.Wood,
                 Stone = gameState.Stone,
                 Gold = gameState.Gold,
+                FarmsLevel = gameState.FarmsLevel,
+                LumberjackLevel = gameState.LumberjackLevel,
+                CastleLevel = gameState.CastleLevel,
+                HousingLevel = gameState.HousingLevel,
+                MinesLevel = gameState.MinesLevel,
             };
 
             return Ok(gameStateDTO);

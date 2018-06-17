@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CRAMWeb.Models;
+using Microsoft.AspNet.Identity;
+using CRAMWeb.ContextManagers;
 
 namespace CRAMWeb.Controllers
 {
@@ -116,6 +118,20 @@ namespace CRAMWeb.Controllers
             Game game = db.Games.Find(id);
             db.Games.Remove(game);
             db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        // POST: Games/Delete/5
+        [HttpPost, ActionName("Join")]
+        [ValidateAntiForgeryToken]
+        public ActionResult JoinGame(int id)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = User.Identity.GetUserId();
+                GameContextManager.AddOrUpdateUserToGame(db, id, userId);
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }
 

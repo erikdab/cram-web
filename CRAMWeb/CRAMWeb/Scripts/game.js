@@ -7,6 +7,16 @@ var gameSecond = 0;
 
 // Commands to be run on game tick (one second)
 function gameTick() {
+    if (winnerUserName) {
+        clearInterval(gameTimer);
+        if (winnerUserName == userName) {
+            alert("Congratulations! You won the game! Refresh the page to start again");
+        }
+        else {
+            alert("You lost... This time user '" + winnerUserName + "' won the game!");
+        }
+    }
+
     gameSecond++;
     if (gameSecond >= 60) {
         gameMinute++;
@@ -18,11 +28,18 @@ function gameTick() {
     updateResourceStash();
     updateSelectedDistrict();
 
-    if (! districts.Castle.canUpgradeLevel()) {
-        alert("Congratulations! You won the game! Refresh the page to start again");
-        clearInterval(gameTimer);
-    }
+    gameOver();
+
     syncGameState();
+}
+
+// Check if game over or trigger it.
+function gameOver() {
+    if (!districts.Castle.canUpgradeLevel()) {
+        winnerUserName = userName;
+        clearInterval(gameTimer);
+        alert("Congratulations! You won the game! Refresh the page to start again");
+    }
 }
 
 // Repeat timer function every second to update it
@@ -53,6 +70,7 @@ class GameState {
             this.CastleLevel = gameState.CastleLevel;
             this.HousingLevel = gameState.HousingLevel;
             this.MinesLevel = gameState.MinesLevel;
+            this.UserName = gameState.UserName;
         }
         else {
             this.Food = 0;
@@ -65,6 +83,7 @@ class GameState {
             this.CastleLevel = 1;
             this.HousingLevel = 1;
             this.MinesLevel = 1;
+            this.UserName = "";
         }
     }
 
@@ -246,6 +265,8 @@ class Resources {
 // Game Data
 // ----------------------------------------------------------------------------
 var gameId = 0;
+var userName = "";
+var winnerUserName = "";
 
 // Setup Districts
 // ----------------------------------------------------------------------------
@@ -471,6 +492,8 @@ function pullGameState() {
         success: function (result) {
             var gameState = new GameState(gameId, result);
             gameState.save(resourceStash, districts);
+            userName = gameState.UserName;
+
             updateSelectedDistrict();
             updateResourceStash();
         },
@@ -486,7 +509,6 @@ function pullGameState() {
 function syncGameState() {
     var gameState = new GameState(gameId);
     gameState.load(resourceStash, districts);
-    var test = JSON.stringify(gameState);
     $.ajax({
         url: "/api/GameState/" + gameId,
         data: JSON.stringify(gameState),
@@ -494,7 +516,11 @@ function syncGameState() {
         contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (result) {
+            $('#gameName').html(result.GameName);
             // If need to do anything
+            if (result.WinnerUserName) {
+                winnerUserName = result.WinnerUserName;
+            }
         },
         error: function (errormessage) {
             handleSaveErrors(errormessage.responseText);
@@ -514,6 +540,6 @@ function handleSaveErrors(validationErrors) {
         }
     }
     catch (e) {
-        console.log(message);
+        console.log(validationErrors);
     }
 }

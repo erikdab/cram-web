@@ -41,7 +41,7 @@ footer {
 nav {
     background-image: url("Images/background1.jpg");
     background-size: cover;
-    height: 45px;
+    height: 44px;
     border-radius: 20px;
     border: 2px solid;
     width: 900px;
@@ -52,9 +52,19 @@ nav {
 
 /* Timer styling */
 .timer {
-    width: 200px;
+    width: 100px;
+}
+
+/* Game Name styling */
+.gameName {
+    width: 270px;
+}
+
+/* Game Name and Timer styling */
+.timer, .gameName {
     text-align: center;
-    line-height: 45px;
+    line-height: 43px;
+    font-weight: bold;
 }
 
 /* Content section styling */

@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CRAMWeb.Models;
+using Microsoft.AspNet.Identity;
 
 namespace CRAMWeb.Controllers
 {
@@ -32,6 +33,8 @@ namespace CRAMWeb.Controllers
                 return NotFound();
             }
 
+            var userName = User.Identity.GetUserName();
+
             GameStateDTO gameStateDTO = new GameStateDTO {
                 Id = gameState.Id,
                 Food = gameState.Food,
@@ -43,13 +46,14 @@ namespace CRAMWeb.Controllers
                 CastleLevel = gameState.CastleLevel,
                 HousingLevel = gameState.HousingLevel,
                 MinesLevel = gameState.MinesLevel,
+                UserName = userName,
             };
 
             return Ok(gameStateDTO);
         }
 
         // PUT: api/GameState/5
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(GameDTO))]
         public IHttpActionResult PutGameState(int id, GameState gameState)
         {
             if (!ModelState.IsValid)
@@ -80,7 +84,26 @@ namespace CRAMWeb.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            var gameStateFull = db.GameStates.Include(g => g.Game).Include(g => g.User).SingleOrDefault(g => g.Id == gameState.Id);
+            var game = db.Games.Find(gameStateFull.Game.Id);
+
+            if(gameState.CastleLevel == 3)
+            {
+                game.Winner = db.Users.SingleOrDefault(u => u.UserName == gameStateFull.User.UserName);
+            }
+
+            db.SaveChanges();
+
+            var gameDto = new GameDTO
+            {
+                Id = game.Id,
+                GameName = game.GameName,
+                IsStarted = game.IsStarted,
+                MaxPlayers = game.MaxPlayers,
+                WinnerUserName = game.Winner?.UserName,
+            };
+
+            return Ok(gameDto);
         }
 
         // POST: api/GameState

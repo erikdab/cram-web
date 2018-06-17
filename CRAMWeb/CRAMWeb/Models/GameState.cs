@@ -147,5 +147,10 @@ namespace CRAMWeb.Models
         /// Mines's level
         /// </summary>
         public int MinesLevel { get; set; }
+
+        /// <summary>
+        /// Game State User Name.
+        /// </summary>
+        public string UserName { get; set; }
     }
 }

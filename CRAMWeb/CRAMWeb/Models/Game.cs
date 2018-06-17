@@ -48,4 +48,35 @@ namespace CRAMWeb.Models
         /// </summary>
         public virtual IList<GameState> GameStates { get; set; }
     }
+
+    /// <summary>
+    /// Table containing games DTO.
+    /// </summary>
+    public class GameDTO
+    {
+        /// <summary>
+        /// Game Id.
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Game's name.
+        /// </summary>
+        public string GameName { get; set; }
+
+        /// <summary>
+        /// Max players that can participate in game - 4 is default.
+        /// </summary>
+        public int MaxPlayers { get; set; } = 4;
+
+        /// <summary>
+        /// Indicates if game has started
+        /// </summary>
+        public bool IsStarted { get; set; }
+
+        /// <summary>
+        /// Winner of the game
+        /// </summary>
+        public string WinnerUserName { get; set; }
+    }
 }

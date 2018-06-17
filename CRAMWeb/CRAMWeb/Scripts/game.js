@@ -123,6 +123,7 @@ class GameState {
                     district.level = this.CastleLevel;
                     break;
             }
+            district.updateImage();
         }
     }
 }

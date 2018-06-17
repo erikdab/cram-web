@@ -149,7 +149,8 @@ namespace CRAMWeb.Controllers
         [Authorize]
         public ActionResult JoinGame(int id)
         {
-            if (User.Identity.IsAuthenticated)
+            var game = db.Games.Single(g => g.Id == id);
+            if (User.Identity.IsAuthenticated && game.Users.Count < game.MaxPlayers)
             {
                 var userId = User.Identity.GetUserId();
                 GameContextManager.AddOrUpdateUserAndGameConnection(db, id, userId);

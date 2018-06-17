@@ -55,7 +55,7 @@
         @Html.ActionLink("Leave", "Leave", new { id = Model.Id })
         <text>|</text>
     }
-    else if (!Model.IsStarted)
+    else if (!Model.IsStarted && Model.MaxPlayers > Model.Users.Count)
     {
         @Html.ActionLink("Join", "Join", new { id = Model.Id })
         <text>|</text>

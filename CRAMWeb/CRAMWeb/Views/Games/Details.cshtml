@@ -36,18 +36,29 @@
         <!--List is generated based on data stored in database-->
         @foreach (var player in Model.Users)
         {
-        <dt>
-            @Html.DisplayNameFor(model => player.UserName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => player.UserName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => player.UserName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => player.UserName)
+            </dd>
         }
     </dl>
 </div>
 
 <p>
-    @Html.ActionLink("Start Game", "Start", new { id = Model.Id }) |
+    @if (ViewBag.UserGames.Contains(Model.Id))
+    {
+        @Html.ActionLink(Model.IsStarted ? "Open Game" : "Begin Game", "Start", new { id = Model.Id })
+        <text>|</text>
+        @Html.ActionLink("Leave", "Leave", new { id = Model.Id })
+        <text>|</text>
+    }
+    else
+    {
+        @Html.ActionLink("Join", "Join", new { id = Model.Id })
+        <text>|</text>
+    }
     @Html.ActionLink("Back to List", "Index")
 </p>

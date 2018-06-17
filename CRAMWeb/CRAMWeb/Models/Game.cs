@@ -29,6 +29,11 @@ namespace CRAMWeb.Models
         public int MaxPlayers { get; set; } = 4;
 
         /// <summary>
+        /// Indicates if game has started
+        /// </summary>
+        public bool IsStarted { get; set; }
+
+        /// <summary>
         /// Players signed into selected game.
         /// </summary>
         public virtual IList<ApplicationUser> Users { get; set; }

@@ -23,30 +23,13 @@ namespace CRAMWeb.ContextManagers
                 userReceiveLink.Games.Add(database.Games.Single(g => g.Id == gameId));
             }
 
+            database.SaveChanges();
+
             Game gameReceiveLink = database.Games.SingleOrDefault(g => g.Id == gameId);
-            ApplicationUser user = game.Users.SingleOrDefault(u => u.Id == userId);
+            ApplicationUser user = gameReceiveLink.Users.SingleOrDefault(u => u.Id == userId);
             if (user == null)
             {
-                game.Users.Add(database.Users.Single(u => u.Id == userId));
-
-                GameState gameState = new GameState()
-                {
-                    Food = 0,
-                    Wood = 0,
-                    Stone = 0,
-                    Gold = 0,
-                    Soldiers = 0,
-                    CastleLevel = 1,
-                    FarmsLevel = 1,
-                    LumberjackLevel = 1,
-                    HousingLevel = 1,
-                    MinesLevel = 1,
-                    User = userReceiveLink,
-                    Game = gameReceiveLink,
-                    SentRaids = new List<Raid>(),
-                    ReceivedRaids = new List<Raid>()
-                };
-                database.GameStates.Add(gameState);
+                gameReceiveLink.Users.Add(database.Users.Single(u => u.Id == userId));
             }
 
             database.SaveChanges();

@@ -220,6 +220,10 @@
     <Compile Include="Migrations\201806170734243_Corrected Multiplicity Between Games, GameStates and Users.Designer.cs">
       <DependentUpon>201806170734243_Corrected Multiplicity Between Games, GameStates and Users.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806171131528_IsStarted status indicator added to model.cs" />
+    <Compile Include="Migrations\201806171131528_IsStarted status indicator added to model.Designer.cs">
+      <DependentUpon>201806171131528_IsStarted status indicator added to model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Game.cs" />
@@ -377,6 +381,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806170734243_Corrected Multiplicity Between Games, GameStates and Users.resx">
       <DependentUpon>201806170734243_Corrected Multiplicity Between Games, GameStates and Users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806171131528_IsStarted status indicator added to model.resx">
+      <DependentUpon>201806171131528_IsStarted status indicator added to model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

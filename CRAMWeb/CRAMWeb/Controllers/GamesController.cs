@@ -15,15 +15,28 @@ namespace CRAMWeb.Controllers
     public class GamesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        /// <summary>
+        /// Gets User Game Ids
+        /// </summary>
+        /// <param name="games"></param>
+        /// <returns></returns>
+        private List<int> GetUserGames(List<Game> games)
+        {
+            if (!User.Identity.IsAuthenticated) return null;
+
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.Find(userId);
+            return games.Where(g => g.Users.Contains(user)).Select(g => g.Id).ToList();
+        }
         
         // GET: Game
         public ActionResult Index()
         {
-            using (var db = new ApplicationDbContext())
-            {
-                var games = db.Games.ToList();
-                return View(games);
-            }
+            var games = db.Games.ToList();
+            ViewBag.UserGames = GetUserGames(games);
+
+            return View(games);
         }
 
         // GET: Games/Details/5
@@ -39,6 +52,9 @@ namespace CRAMWeb.Controllers
             {
                 return HttpNotFound();
             }
+            var games = new List<Game> { game };
+            ViewBag.UserGames = GetUserGames(games);
+
             return View(game);
         }
 
@@ -142,6 +158,20 @@ namespace CRAMWeb.Controllers
             return RedirectToAction("Details", new {id});
         }
 
+        // GET: Games/Leave/5
+        [HttpGet, ActionName("Leave")]
+        [Authorize]
+        public ActionResult LeaveGame(int id)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = User.Identity.GetUserId();
+                GameContextManager.AddOrUpdateUserAndGameConnection(db, id, userId);
+                return RedirectToAction("Details", new { id });
+            }
+            return RedirectToAction("Details", new { id });
+        }
+
         // GET: Games/Start/5
         [HttpGet, ActionName("Start")]
         [Authorize]
@@ -151,8 +181,34 @@ namespace CRAMWeb.Controllers
             {
                 var userId = User.Identity.GetUserId();
                 Game game = db.Games.Single(g => g.Id == id);
-                GameState gameState = game.GameStates.Single(g => g.User.Id == userId);
-                return RedirectToAction("Game", "Home", new { gameState.Id });
+                if(!game.IsStarted)
+                {
+                    game.IsStarted = true;
+                    foreach (var user in game.Users)
+                    {
+                        GameState gameState = new GameState()
+                        {
+                            Food = 0,
+                            Wood = 0,
+                            Stone = 0,
+                            Gold = 0,
+                            Soldiers = 0,
+                            CastleLevel = 1,
+                            FarmsLevel = 1,
+                            LumberjackLevel = 1,
+                            HousingLevel = 1,
+                            MinesLevel = 1,
+                            User = user,
+                            Game = game,
+                            SentRaids = new List<Raid>(),
+                            ReceivedRaids = new List<Raid>()
+                        };
+                        db.GameStates.Add(gameState);
+                        db.SaveChanges();
+                    }
+                }
+                GameState userGameState = game.GameStates.Single(g => g.User.Id == userId);
+                return RedirectToAction("Game", "Home", new { userGameState.Id });
             }
             return RedirectToAction("Index");
         }

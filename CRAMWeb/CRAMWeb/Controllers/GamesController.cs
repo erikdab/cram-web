@@ -128,7 +128,7 @@ namespace CRAMWeb.Controllers
             return RedirectToAction("Index");
         }
 
-        // POST: Games/Delete/5
+        // GET: Games/Join/5
         [HttpGet, ActionName("Join")]
         [Authorize]
         public ActionResult JoinGame(int id)
@@ -136,10 +136,25 @@ namespace CRAMWeb.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var userId = User.Identity.GetUserId();
-                GameContextManager.AddOrUpdateUserToGame(db, id, userId);
+                GameContextManager.AddOrUpdateUserAndGameConnection(db, id, userId);
                 return RedirectToAction("Details", new { id });
             }
             return RedirectToAction("Details", new {id});
+        }
+
+        // GET: Games/Start/5
+        [HttpGet, ActionName("Start")]
+        [Authorize]
+        public ActionResult StartGame(int id)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = User.Identity.GetUserId();
+                Game game = db.Games.Single(g => g.Id == id);
+                GameState gameState = game.GameStates.Single(g => g.User.Id == userId);
+                return RedirectToAction("Game", "Home", new { gameState.Id });
+            }
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

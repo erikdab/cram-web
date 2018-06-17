@@ -28,14 +28,26 @@
 
     </dl>
 </div>
+<!-- List of players who have joined -->
 <div>
     <h4>Players</h4>
-    <table class="table">
-        
-    </table>
+    <hr />
+    <dl class="dl-horizontal">
+        <!--List is generated based on data stored in database-->
+        @foreach (var player in Model.Users)
+        {
+        <dt>
+            @Html.DisplayNameFor(model => player.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => player.UserName)
+        </dd>
+        }
+    </dl>
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Start Game", "Start", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -34,6 +34,11 @@ namespace CRAMWeb.Models
         public bool IsStarted { get; set; }
 
         /// <summary>
+        /// Winner of the game
+        /// </summary>
+        public virtual ApplicationUser Winner { get; set; }
+
+        /// <summary>
         /// Players signed into selected game.
         /// </summary>
         public virtual IList<ApplicationUser> Users { get; set; }

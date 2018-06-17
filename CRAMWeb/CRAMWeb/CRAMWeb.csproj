@@ -224,6 +224,10 @@
     <Compile Include="Migrations\201806171131528_IsStarted status indicator added to model.Designer.cs">
       <DependentUpon>201806171131528_IsStarted status indicator added to model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806171234502_Winner added to game.cs" />
+    <Compile Include="Migrations\201806171234502_Winner added to game.Designer.cs">
+      <DependentUpon>201806171234502_Winner added to game.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Game.cs" />
@@ -384,6 +388,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806171131528_IsStarted status indicator added to model.resx">
       <DependentUpon>201806171131528_IsStarted status indicator added to model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806171234502_Winner added to game.resx">
+      <DependentUpon>201806171234502_Winner added to game.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
